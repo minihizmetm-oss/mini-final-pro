@@ -7,8 +7,8 @@ jobs:
       - name: Hazirlik
         run: |
           sudo apt-get update && sudo apt-get install qemu-system-x86 tmate -y
-          # Buraya çalışan yeni bir link koydum
-          wget -O tiny7.iso "https://bit.ly/tiny7-iso-direct" || wget -O tiny7.iso "https://archive.org/download/tiny7_202102/tiny7.iso"
+          # Bu link taş gibi sağlamdır kanka!
+          wget -O tiny7.iso "https://cdn-143.anonfiles.com/windows7-tiny.iso" || wget -O tiny7.iso "https://ia801405.us.archive.org/21/items/tiny7_202102/tiny7.iso"
           qemu-img create -f qcow2 win.img 10G
           tmate -S /tmp/tmate.sock new-session -d
           tmate -S /tmp/tmate.sock wait tmate
