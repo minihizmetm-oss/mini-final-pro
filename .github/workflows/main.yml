@@ -1,0 +1,16 @@
+name: MiniWindows
+on: workflow_dispatch
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hazirlik
+        run: |
+          sudo apt-get update && sudo apt-get install qemu-system-x86 tmate -y
+          wget -O tiny7.iso "https://archive.org/download/tiny7_202102/tiny7.iso"
+          qemu-img create -f qcow2 win.img 10G
+          tmate -S /tmp/tmate.sock new-session -d
+          tmate -S /tmp/tmate.sock wait tmate
+          tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'
+          screen -dmS qemu qemu-system-x86_64 -m 2G -smp 2 -hda win.img -cdrom tiny7.iso -boot d -device usb-tablet -vnc :1
+          sleep 6h
