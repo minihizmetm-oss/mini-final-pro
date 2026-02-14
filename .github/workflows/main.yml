@@ -7,11 +7,11 @@ jobs:
       - name: Hazirlik
         run: |
           sudo apt-get update && sudo apt-get install qemu-system-x86 tmate -y
-          # Bu link taş gibi sağlamdır kanka!
-          wget -O tiny7.iso "https://cdn-143.anonfiles.com/windows7-tiny.iso" || wget -O tiny7.iso "https://ia801405.us.archive.org/21/items/tiny7_202102/tiny7.iso"
-          qemu-img create -f qcow2 win.img 10G
+          # Senin gonderdigin Tiny11 linki
+          wget -O tiny11.iso "https://archive.org/download/tiny1123h2byfoxkhang/tiny11%2023H2%20by%20NTDEV.iso" || wget -O tiny11.iso "https://archive.org/compress/tiny1123h2byfoxkhang/formats=ISO%20IMAGE&file=/tiny1123h2byfoxkhang.zip"
+          qemu-img create -f qcow2 win.img 15G
           tmate -S /tmp/tmate.sock new-session -d
           tmate -S /tmp/tmate.sock wait tmate
           tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'
-          screen -dmS qemu qemu-system-x86_64 -m 2G -smp 2 -hda win.img -cdrom tiny7.iso -boot d -device usb-tablet -vnc :1
+          screen -dmS qemu qemu-system-x86_64 -m 3G -smp 2 -hda win.img -cdrom tiny11.iso -boot d -device usb-tablet -vnc :1
           sleep 6h
